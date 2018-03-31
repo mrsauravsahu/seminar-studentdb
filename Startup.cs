@@ -25,6 +25,10 @@ namespace Test
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddMvc();
+      services.AddMvc()
+        .AddJsonOptions(
+            options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
       services.AddDbContext<TestContext>(options =>
       options.UseMySql(Configuration.GetConnectionString("StudentDb")));
     }
